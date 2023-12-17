@@ -1,30 +1,32 @@
-import { Sequelize } from "sequelize";
-import db from "../config/Database.js";
+// models/UserModel.js
+const Sequelize = require("sequelize");
+const db = require("../config/database");
 
-const { DataTypes } = Sequelize;
-
-const Users = db.define(
-  "users",
-  {
-    name: {
-      type: DataTypes.STRING,
-    },
-    email: {
-      type: DataTypes.STRING,
-    },
-    password: {
-      type: DataTypes.STRING,
-    },
-    refresh_token: {
-      type: DataTypes.TEXT,
-    },
+const User = db.define("user", {
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
   },
-  {
-    freezeTableName: true,
-  }
-);
+  name: {
+    type: Sequelize.STRING,
+  },
+  email: {
+    type: Sequelize.STRING,
+    unique: true,
+  },
+  password: {
+    type: Sequelize.STRING,
+  },
+});
 
-export default Users;
-(async () => {
-  await db.sync();
-})();
+// Sinkronisasi model dengan database
+db.sync()
+  .then(() => {
+    console.log("Model User terhubung dengan tabel di database");
+  })
+  .catch((err) => {
+    console.error("Tidak dapat sinkronisasi model User dengan tabel di database:", err);
+  });
+
+module.exports = User;
