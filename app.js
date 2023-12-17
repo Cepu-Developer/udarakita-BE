@@ -16,7 +16,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "http://localhost:3000", // Gantilah dengan alamat domain aplikasi klien Anda
+    origin: "https://cek-udara.my.id/", // Gantilah dengan alamat domain aplikasi klien Anda
     credentials: true,
   })
 );
