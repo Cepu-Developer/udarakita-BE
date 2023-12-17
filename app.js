@@ -1,4 +1,3 @@
-// app.js
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -14,9 +13,11 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+// Izinkan akses dari dua alamat yang berbeda
+const allowedOrigins = ["https://cek-udara.my.id", "https://localhost:5173"];
 app.use(
   cors({
-    origin: "https://cek-udara.my.id/", // Gantilah dengan alamat domain aplikasi klien Anda
+    origin: allowedOrigins,
     credentials: true,
   })
 );
